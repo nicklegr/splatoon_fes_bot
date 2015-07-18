@@ -1,0 +1,13 @@
+web:
+  build: .
+  links:
+   - mongodb
+  environment:
+    VIRTUAL_HOST: deletter.airytail.co
+  restart: always
+mongodb:
+  image: mongo
+  command: mongod --smallfiles
+  restart: always
+  volumes:
+    - ./mongodb:/data/db
