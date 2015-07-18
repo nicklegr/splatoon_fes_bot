@@ -3,7 +3,7 @@ web:
   links:
    - mongodb
   environment:
-    VIRTUAL_HOST: deletter.airytail.co
+    VIRTUAL_HOST: splatoon.airytail.co
   restart: always
 mongodb:
   image: mongo

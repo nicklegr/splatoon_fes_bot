@@ -1,2 +1,3 @@
-bundle exec ruby worker.rb &
-bundle exec ruby web.rb -p 80
+bundle exec ruby worker.rb
+# &
+# bundle exec ruby web.rb -p 80
