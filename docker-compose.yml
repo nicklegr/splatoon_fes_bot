@@ -1,10 +1,22 @@
-web:
+# web:
+#   build: .
+#   links:
+#    - mongodb
+#   environment:
+#     VIRTUAL_HOST: splatoon.airytail.co
+#   restart: always
+crawl:
   build: .
   links:
    - mongodb
-  environment:
-    VIRTUAL_HOST: splatoon.airytail.co
   restart: always
+  command: bundle exec ruby worker.rb
+bot:
+  build: .
+  links:
+   - mongodb
+  restart: always
+  command: bundle exec clockwork bot.rb
 mongodb:
   image: mongo
   command: mongod --smallfiles
