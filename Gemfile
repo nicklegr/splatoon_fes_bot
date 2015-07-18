@@ -11,4 +11,6 @@ gem 'thin'
 gem 'haml'
 gem 'emk-sinatra-url-for'
 
+gem 'clockwork'
+
 gem 'pry'

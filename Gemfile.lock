@@ -14,6 +14,9 @@ GEM
       bson (~> 1.7.0)
     buftok (0.2.0)
     builder (3.0.4)
+    clockwork (1.2.0)
+      activesupport
+      tzinfo
     coderay (1.1.0)
     cookiejar (0.3.2)
     daemons (1.1.9)
@@ -109,6 +112,7 @@ PLATFORMS
 
 DEPENDENCIES
   bson_ext
+  clockwork
   emk-sinatra-url-for
   haml
   mongoid

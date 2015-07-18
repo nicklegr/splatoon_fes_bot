@@ -1,5 +1,6 @@
 # coding: utf-8
 
+require "clockwork"
 require "twitter"
 require "pp"
 require_relative "db"
@@ -28,7 +29,7 @@ class Bot
     @votes = count_vote()
   end
 
-  def start
+  def tweet
     votes_a, votes_b = @votes
     total_vote = votes_a + votes_b
     rate_a = 100.0 * votes_a / total_vote
@@ -89,18 +90,28 @@ class Bot
       end
 
       # debug
-      tweets << {
-        "score_a" => score_a,
-        "score_b" => score_b,
-      }
+      # tweets << {
+      #   "score_a" => score_a,
+      #   "score_b" => score_b,
+      # }
     end
 
     # debug
-    pp user_tweets
+    # pp user_tweets
 
     [ votes_a, votes_b ]
   end
 end
 
-bot = Bot.new
-bot.start
+module Clockwork
+  def self.tweet
+    bot = Bot.new
+    bot.tweet
+  end
+
+  handler do |job|
+    self.send(job.to_sym)
+  end
+
+  every(1.hour, "tweet")
+end
