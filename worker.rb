@@ -6,6 +6,11 @@ require 'tweetstream'
 require './db'
 
 class Watch
+  KEYWORDS = %w|
+    splatoon
+    スプラトゥーン
+  |
+
   def initialize
     @yaml = YAML.load_file('config.yaml')
 
@@ -32,21 +37,11 @@ class Watch
       on_new_status(status)
     end
 
-    client.on_delete do |status_id, user_id|
-      on_delete(status_id, user_id)
-    end
-
-    target_ids = @twitter.users(@yaml['target_users']).map do |e|
-      e.id
-    end
-
-    client.follow(target_ids)
+    client.track(KEYWORDS)
   end
 
   def on_new_status(status)
     begin
-      # followは、その人への in-reply-to や retweet も飛んでくる
-      # reply-toは宝がありそうだけど、RTは捨てる
       return if status.retweeted_status?
 
       puts "#{status.user.id} #{status.user.screen_name} #{status.text}"
@@ -60,14 +55,6 @@ class Watch
         record.user_id = status.user.id
         record.screen_name = status.user.screen_name
         record.user_name = status.user.name
-        # record.profile_image_url = status.user.profile_image_url
-
-        if status.urls.size != 0
-          record.urls = status.urls.map do |e| e.expanded_url.to_s end
-        end
-
-        record.source = status.source
-        record.retweet_count = status.retweet_count
         record.created_at = status.created_at
 
         record.save!
@@ -77,19 +64,6 @@ class Watch
       # 不明なエラーのときも、とりあえず動き続ける
       puts "#{e} (#{e.class})"
       puts e.backtrace
-    end
-  end
-
-  def on_delete(status_id, user_id)
-    # puts "deleted: #{user_id}'s #{status_id}"
-    
-    record = Deleted.find_or_initialize_by(status_id: status_id)
-    if record.new_record?
-      record.user_id = user_id
-      record.status_id = status_id
-      record.deleted_at = Time.now
-
-      record.save!
     end
   end
 end
