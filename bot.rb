@@ -33,9 +33,22 @@ class Bot
     total_vote = votes_a + votes_b
     rate_a = 100.0 * votes_a / total_vote
     rate_b = 100.0 * votes_b / total_vote
+    winner = votes_a > votes_b ? "レモンティー" : "ミルクティー"
 
-    puts sprintf("【選挙速報】\nレモンティー %.1f%%\nミルクティー %.1f%%\n(集計対象 %d人)",
-      rate_a, rate_b, total_vote)
+    tweet = sprintf(<<-EOS, rate_a, rate_b, winner, total_vote)
+【選挙速報】
+レモンティー %.1f%%
+ミルクティー %.1f%%
+
+%sが優勢です！
+#splatoon #スプラトゥーン
+    EOS
+
+    @twitter.update(tweet)
+
+    # log
+    puts Time.now
+    puts tweet
   end
 
   def count_vote
