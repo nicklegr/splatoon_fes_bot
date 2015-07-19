@@ -49,6 +49,7 @@ class Bot
 
     # log
     puts Time.now
+    puts "total_vote: #{total_vote} votes_a: #{votes_a} votes_b: #{votes_b}"
     puts tweet
   end
 
