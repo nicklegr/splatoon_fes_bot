@@ -3,17 +3,7 @@
 require "clockwork"
 require "twitter"
 require "pp"
-require_relative "db"
-
-TEAM_A_WORDS = %w|
-  レモン
-  アオリ
-|
-
-TEAM_B_WORDS = %w|
-  ミルク
-  ホタル
-|
+require_relative "stat"
 
 class Bot
   def initialize
@@ -25,23 +15,19 @@ class Bot
       config.access_token = @yaml['oauth_token']
       config.access_token_secret = @yaml['oauth_token_secret']
     end
-
-    @votes = count_vote()
   end
 
   def tweet
-    votes_a, votes_b = @votes
-    total_vote = votes_a + votes_b
-    rate_a = 100.0 * votes_a / total_vote
-    rate_b = 100.0 * votes_b / total_vote
-    winner = votes_a > votes_b ? "レモンティー" : "ミルクティー"
+    stat = Stat.get
 
-    tweet = sprintf(<<-EOS, rate_a, rate_b, winner, total_vote)
+    tweet = sprintf(<<-EOS, stat[:rate_a], stat[:rate_b])
 【選挙速報】
-レモンティー %.1f%%
-ミルクティー %.1f%%
+#{stat[:team_a_name]} %.1f%%
+#{stat[:team_b_name]} %.1f%%
 
-%sが優勢です！
+#{stat[:winner]}が優勢です！
+
+(集計アカウント数: #{stat[:total_vote]})
 #splatoon #スプラトゥーン
     EOS
 
@@ -49,58 +35,8 @@ class Bot
 
     # log
     puts Time.now
-    puts "total_vote: #{total_vote} votes_a: #{votes_a} votes_b: #{votes_b}"
+    puts "total_vote: #{stat[:total_vote]} votes_a: #{stat[:votes_a]} votes_b: #{stat[:votes_b]}"
     puts tweet
-  end
-
-  def count_vote
-    found_tweets = Tweet.all.select do |e|
-      ret = false
-      (TEAM_A_WORDS + TEAM_B_WORDS).each do |word|
-        if e.text.include?(word)
-          ret = true
-          break
-        end
-      end
-      ret
-    end
-
-    user_tweets = found_tweets.group_by do |e|
-      e.user_id
-    end
-
-    votes_a = votes_b = 0
-
-    user_tweets.each do |user_id, tweets|
-      score_a = score_b = 0
-
-      tweets.each do |tweet|
-        TEAM_A_WORDS.each do |e|
-          score_a += tweet.text.scan(e).size
-        end
-
-        TEAM_B_WORDS.each do |e|
-          score_b += tweet.text.scan(e).size
-        end
-      end
-
-      if score_a > score_b
-        votes_a += 1
-      elsif score_b > score_a
-        votes_b += 1
-      end
-
-      # debug
-      # tweets << {
-      #   "score_a" => score_a,
-      #   "score_b" => score_b,
-      # }
-    end
-
-    # debug
-    # pp user_tweets
-
-    [ votes_a, votes_b ]
   end
 end
 
