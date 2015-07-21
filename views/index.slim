@@ -1,0 +1,18 @@
+h3 スプラトゥーンフェス選挙速報
+
+table.table style='width: 40%'
+  tr
+    td= @stat[:team_a_name]
+    td= "#{@stat[:votes_a]}人 (#{sprintf("%.1f", @stat[:rate_a])}%)"
+  tr
+    td= @stat[:team_b_name]
+    td= "#{@stat[:votes_b]}人 (#{sprintf("%.1f", @stat[:rate_b])}%)"
+  tr
+    td 集計対象
+    td= "#{@stat[:total_vote]}人"
+  tr
+    td ツイート数
+    td= @tweet_count
+  tr
+    td 最終更新時刻
+    td= @last_update.strftime('%Y/%m/%d %H:%M:%S')

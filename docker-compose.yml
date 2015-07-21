@@ -1,10 +1,13 @@
-# web:
-#   build: .
-#   links:
-#    - mongodb
-#   environment:
-#     VIRTUAL_HOST: splatoon.airytail.co
-#   restart: always
+web:
+  build: .
+  links:
+   - mongodb
+  # ports:
+  #  - "80:80"
+  environment:
+    VIRTUAL_HOST: splatoon-fes.airytail.co
+  restart: always
+  command: bundle exec ruby web.rb -o 0.0.0.0 -p 80
 crawl:
   build: .
   links:
