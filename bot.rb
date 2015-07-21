@@ -50,5 +50,5 @@ module Clockwork
     self.send(job.to_sym)
   end
 
-  every(1.hour, "tweet")
+  every(1.hour, "tweet", :at => "**:00")
 end
