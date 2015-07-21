@@ -21,5 +21,3 @@ ADD . /script
 WORKDIR /script
 
 EXPOSE 80
-
-CMD bash run.sh
