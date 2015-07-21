@@ -10,6 +10,17 @@ table.table style='width: 40%'
   tr
     td 集計対象
     td= "#{@stat[:total_vote]}人"
+
+  tr
+    td= "「#{@stat_team_name_only[:team_a_name]}」のみ"
+    td= "#{@stat_team_name_only[:votes_a]}人 (#{sprintf("%.1f", @stat_team_name_only[:rate_a])}%)"
+  tr
+    td= "「#{@stat_team_name_only[:team_b_name]}」のみ"
+    td= "#{@stat_team_name_only[:votes_b]}人 (#{sprintf("%.1f", @stat_team_name_only[:rate_b])}%)"
+  tr
+    td 集計対象
+    td= "#{@stat_team_name_only[:total_vote]}人"
+
   tr
     td ツイート数
     td= @tweet_count

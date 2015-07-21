@@ -16,8 +16,8 @@ TEAM_B_WORDS = %w|
 |
 
 class Stat
-  def self.get
-    votes_a, votes_b = count_vote()
+  def self.get(team_a_words=TEAM_A_WORDS, team_b_words=TEAM_B_WORDS)
+    votes_a, votes_b = count_vote(team_a_words, team_b_words)
     total_vote = votes_a + votes_b
 
     {
@@ -32,10 +32,10 @@ class Stat
     }
   end
 
-  def self.count_vote
+  def self.count_vote(team_a_words, team_b_words)
     found_tweets = Tweet.all.select do |e|
       ret = false
-      (TEAM_A_WORDS + TEAM_B_WORDS).each do |word|
+      (team_a_words + team_b_words).each do |word|
         if e.text.include?(word)
           ret = true
           break
@@ -54,11 +54,11 @@ class Stat
       score_a = score_b = 0
 
       tweets.each do |tweet|
-        TEAM_A_WORDS.each do |e|
+        team_a_words.each do |e|
           score_a += tweet.text.scan(e).size
         end
 
-        TEAM_B_WORDS.each do |e|
+        team_b_words.each do |e|
           score_b += tweet.text.scan(e).size
         end
       end
