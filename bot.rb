@@ -7,6 +7,10 @@ require_relative "stat"
 
 class Bot
   def initialize
+    config = YAML.load_file('config.yaml')
+    @start_time = Time.parse(config['fes_period']['start'])
+    @end_time = Time.parse(config['fes_period']['end'])
+
     @yaml = YAML.load_file('auth.yaml')
 
     @twitter = Twitter::REST::Client.new do |config|
@@ -18,6 +22,10 @@ class Bot
   end
 
   def tweet
+    # 開催時間外はツイートしない
+    # 開始・終了時刻ちょうどはツイートしたいのでマージン
+    return if Time.now < (@start_time - 1.minute) || (@end_time + 1.minute) < Time.now
+
     stat = Stat.get
 
     tweet = sprintf(<<-EOS, stat[:rate_a], stat[:rate_b])
