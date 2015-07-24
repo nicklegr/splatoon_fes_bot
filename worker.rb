@@ -6,12 +6,8 @@ require 'tweetstream'
 require './db'
 
 class Watch
-  KEYWORDS = %w|
-    splatoon
-    スプラトゥーン
-  |
-
   def initialize
+    @config = YAML.load_file('config.yaml')
     @yaml = YAML.load_file('auth.yaml')
 
     @twitter = Twitter::REST::Client.new do |config|
@@ -37,7 +33,7 @@ class Watch
       on_new_status(status)
     end
 
-    client.track(KEYWORDS)
+    client.track(@config["track_keywords"])
   end
 
   def on_new_status(status)
