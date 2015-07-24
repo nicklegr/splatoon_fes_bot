@@ -7,7 +7,7 @@ require_relative "stat"
 
 class Bot
   def initialize
-    @yaml = YAML.load_file('config.yaml')
+    @yaml = YAML.load_file('auth.yaml')
 
     @twitter = Twitter::REST::Client.new do |config|
       config.consumer_key = @yaml['consumer_key']
