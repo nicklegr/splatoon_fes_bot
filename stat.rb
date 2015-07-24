@@ -33,7 +33,15 @@ class Stat
   end
 
   def self.count_vote(team_a_words, team_b_words)
-    found_tweets = Tweet.all.select do |e|
+    config = YAML.load_file('config.yaml')
+    @start_time = Time.parse(config['fes_period']['start'])
+    @end_time = Time.parse(config['fes_period']['end'])
+
+    valid_tweets = Tweet
+      .where(:created_at.gte => @start_time)
+      .and(:created_at.lte => @end_time)
+
+    found_tweets = valid_tweets.select do |e|
       ret = false
       (team_a_words + team_b_words).each do |word|
         if e.text.include?(word)
