@@ -2,41 +2,30 @@
 
 require_relative "db"
 
-TEAM_A_NAME = "レモンティー"
-TEAM_B_NAME = "ミルクティー"
-
-TEAM_A_WORDS = %w|
-  レモン
-  アオリ
-|
-
-TEAM_B_WORDS = %w|
-  ミルク
-  ホタル
-|
-
 class Stat
-  def self.get(team_a_words=TEAM_A_WORDS, team_b_words=TEAM_B_WORDS)
+  def initialize
+    @config = YAML.load_file('config.yaml')
+    @start_time = Time.parse(@config['fes_period']['start'])
+    @end_time = Time.parse(@config['fes_period']['end'])
+  end
+
+  def get(team_a_words=@config["team_a_words"], team_b_words=@config["team_b_words"])
     votes_a, votes_b = count_vote(team_a_words, team_b_words)
     total_vote = votes_a + votes_b
 
     {
-      :team_a_name => TEAM_A_NAME,
-      :team_b_name => TEAM_B_NAME,
+      :team_a_name => @config["team_a_name"],
+      :team_b_name => @config["team_b_name"],
       :votes_a => votes_a,
       :votes_b => votes_b,
       :total_vote => total_vote,
       :rate_a => 100.0 * votes_a / total_vote,
       :rate_b => 100.0 * votes_b / total_vote,
-      :winner => votes_a > votes_b ? TEAM_A_NAME : TEAM_B_NAME,
+      :winner => votes_a > votes_b ? @config["team_a_name"] : @config["team_b_name"],
     }
   end
 
-  def self.count_vote(team_a_words, team_b_words)
-    config = YAML.load_file('config.yaml')
-    @start_time = Time.parse(config['fes_period']['start'])
-    @end_time = Time.parse(config['fes_period']['end'])
-
+  def count_vote(team_a_words, team_b_words)
     valid_tweets = Tweet
       .where(:created_at.gte => @start_time)
       .and(:created_at.lte => @end_time)

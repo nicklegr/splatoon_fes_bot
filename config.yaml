@@ -4,3 +4,15 @@ fes_period:
 track_keywords:
   - splatoon
   - スプラトゥーン
+team_a_name: レモンティー
+team_b_name: ミルクティー
+team_a_words:
+  - レモン
+  - アオリ
+team_b_words:
+  - ミルク
+  - ホタル
+team_a_words_min:
+  - レモン
+team_b_words_min:
+  - ミルク

@@ -26,7 +26,7 @@ class Bot
     # 開始・終了時刻ちょうどはツイートしたいのでマージン
     return if Time.now < (@start_time - 1.minute) || (@end_time + 1.minute) < Time.now
 
-    stat = Stat.get
+    stat = Stat.new.get
 
     tweet = sprintf(<<-EOS, stat[:rate_a], stat[:rate_b])
 【選挙速報】
