@@ -33,7 +33,7 @@ class Watch
       on_new_status(status)
     end
 
-    client.track(@config["track_keywords"])
+    client.track(@config["track_keywords"], language: "ja")
   end
 
   def on_new_status(status)
