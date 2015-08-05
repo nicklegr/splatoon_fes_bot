@@ -10,17 +10,19 @@ class Stat
   end
 
   def get(team_a_words=@config["team_a_words"], team_b_words=@config["team_b_words"])
-    votes_a, votes_b = count_vote(team_a_words, team_b_words)
-    total_vote = votes_a + votes_b
+    votes_a, votes_b, votes_undecided = count_vote(team_a_words, team_b_words)
+    total_vote = votes_a + votes_b + votes_undecided
 
     {
       :team_a_name => @config["team_a_name"],
       :team_b_name => @config["team_b_name"],
       :votes_a => votes_a,
       :votes_b => votes_b,
+      :votes_undecided => votes_undecided,
       :total_vote => total_vote,
       :rate_a => 100.0 * votes_a / total_vote,
       :rate_b => 100.0 * votes_b / total_vote,
+      :rate_undecided => 100.0 * votes_undecided / total_vote,
       :winner => votes_a > votes_b ? @config["team_a_name"] : @config["team_b_name"],
     }
   end
@@ -45,7 +47,7 @@ class Stat
       e.user_id
     end
 
-    votes_a = votes_b = 0
+    votes_a = votes_b = votes_undecided = 0
 
     user_tweets.each do |user_id, tweets|
       score_a = score_b = 0
@@ -64,6 +66,8 @@ class Stat
         votes_a += 1
       elsif score_b > score_a
         votes_b += 1
+      else
+        votes_undecided += 1
       end
 
       # debug
@@ -76,6 +80,6 @@ class Stat
     # debug
     # pp user_tweets
 
-    [ votes_a, votes_b ]
+    [ votes_a, votes_b, votes_undecided ]
   end
 end

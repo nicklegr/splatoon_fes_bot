@@ -28,10 +28,11 @@ class Bot
 
     stat = Stat.new.get
 
-    tweet = sprintf(<<-EOS, stat[:rate_a], stat[:rate_b])
+    tweet = sprintf(<<-EOS, stat[:rate_a], stat[:rate_b], stat[:rate_undecided])
 【選挙速報】
 #{stat[:team_a_name]} %.1f%%
 #{stat[:team_b_name]} %.1f%%
+中立 %.1f%%
 
 #{stat[:winner]}が優勢です！
 
@@ -43,7 +44,7 @@ class Bot
 
     # log
     puts Time.now
-    puts "total_vote: #{stat[:total_vote]} votes_a: #{stat[:votes_a]} votes_b: #{stat[:votes_b]}"
+    puts "total_vote: #{stat[:total_vote]} votes_a: #{stat[:votes_a]} votes_b: #{stat[:votes_b]} votes_undecided: #{stat[:votes_undecided]}"
     puts tweet
   end
 end
