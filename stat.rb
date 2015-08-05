@@ -23,6 +23,8 @@ class Stat
       :rate_a => 100.0 * votes_a / total_vote,
       :rate_b => 100.0 * votes_b / total_vote,
       :rate_undecided => 100.0 * votes_undecided / total_vote,
+      :rate_a_in_ab => 100.0 * votes_a / (votes_a + votes_b),
+      :rate_b_in_ab => 100.0 * votes_b / (votes_a + votes_b),
       :winner => votes_a > votes_b ? @config["team_a_name"] : @config["team_b_name"],
     }
   end

@@ -12,7 +12,7 @@ get "/" do
   stat = Stat.new
 
   @stat = stat.get
-  @stat_team_name_only = stat.get(config["team_a_words_min"], config["team_b_words_min"])
+  @stat_min = stat.get(config["team_a_words_min"], config["team_b_words_min"])
 
   @last_update = Tweet.desc(:created_at).first.created_at
   @tweet_count = Tweet.count()

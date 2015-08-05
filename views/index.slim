@@ -1,26 +1,38 @@
-h3 スプラトゥーンフェス選挙速報
+h4 集計
 
-table.table style='width: 40%'
+table.table style='width: 60%'
   tr
     td= @stat[:team_a_name]
-    td= "#{@stat[:votes_a]}人 (#{sprintf("%.1f", @stat[:rate_a])}%)"
+    td= "#{@stat[:votes_a]}人 (#{sprintf("%.1f", @stat[:rate_a])}%, 中立除く: #{sprintf("%.1f", @stat[:rate_a_in_ab])}%)"
   tr
     td= @stat[:team_b_name]
-    td= "#{@stat[:votes_b]}人 (#{sprintf("%.1f", @stat[:rate_b])}%)"
+    td= "#{@stat[:votes_b]}人 (#{sprintf("%.1f", @stat[:rate_b])}%, 中立除く: #{sprintf("%.1f", @stat[:rate_b_in_ab])}%)"
+  tr
+    td 中立
+    td= "#{@stat[:votes_undecided]}人 (#{sprintf("%.1f", @stat[:rate_undecided])}%)"
   tr
     td 集計対象
     td= "#{@stat[:total_vote]}人"
 
+h4 参考
+
+table.table style='width: 60%'
   tr
-    td= "「#{@stat_team_name_only[:team_a_name]}」のみ"
-    td= "#{@stat_team_name_only[:votes_a]}人 (#{sprintf("%.1f", @stat_team_name_only[:rate_a])}%)"
+    td= "「#{@stat_min[:team_a_name]}」のみ"
+    td= "#{@stat_min[:votes_a]}人 (#{sprintf("%.1f", @stat_min[:rate_a])}%, 中立除く: #{sprintf("%.1f", @stat_min[:rate_a_in_ab])}%)"
   tr
-    td= "「#{@stat_team_name_only[:team_b_name]}」のみ"
-    td= "#{@stat_team_name_only[:votes_b]}人 (#{sprintf("%.1f", @stat_team_name_only[:rate_b])}%)"
+    td= "「#{@stat_min[:team_b_name]}」のみ"
+    td= "#{@stat_min[:votes_b]}人 (#{sprintf("%.1f", @stat_min[:rate_b])}%, 中立除く: #{sprintf("%.1f", @stat_min[:rate_b_in_ab])}%)"
+  tr
+    td 中立
+    td= "#{@stat_min[:votes_undecided]}人 (#{sprintf("%.1f", @stat_min[:rate_undecided])}%)"
   tr
     td 集計対象
-    td= "#{@stat_team_name_only[:total_vote]}人"
+    td= "#{@stat_min[:total_vote]}人"
 
+h4 クローラステータス
+
+table.table style='width: 60%'
   tr
     td ツイート数
     td= @tweet_count
