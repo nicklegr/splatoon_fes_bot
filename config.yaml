@@ -1,18 +1,18 @@
 fes_period:
-  start: "2015-07-18 11:00" # 投票の開始時刻
-  end: "2015-07-26 15:00" # 試合の終了時刻
+  start: "2015-08-15 11:00" # 投票の開始時刻
+  end: "2015-08-23 12:00" # 試合の終了時刻
 track_keywords:
   - splatoon
   - スプラトゥーン
-team_a_name: レモンティー
-team_b_name: ミルクティー
+team_a_name: キリギリス
+team_b_name: アリ
 team_a_words:
-  - レモン
+  - キリギリス
   - アオリ
 team_b_words:
-  - ミルク
+  - アリ
   - ホタル
 team_a_words_min:
-  - レモン
+  - キリギリス
 team_b_words_min:
-  - ミルク
+  - アリ
