@@ -8,7 +8,7 @@ require_relative "stat"
 class Bot
   def initialize
     config = YAML.load_file('config.yaml')
-    @start_time = Time.parse(config['fes_period']['start'])
+    @start_time = Time.parse(config['announced_at'])
     @end_time = Time.parse(config['fes_period']['end'])
 
     @yaml = YAML.load_file('auth.yaml')

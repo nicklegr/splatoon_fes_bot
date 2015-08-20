@@ -5,7 +5,7 @@ require_relative "db"
 class Stat
   def initialize
     @config = YAML.load_file('config.yaml')
-    @start_time = Time.parse(@config['fes_period']['start'])
+    @start_time = Time.parse(@config['announced_at'])
     @end_time = Time.parse(@config['fes_period']['end'])
   end
 
