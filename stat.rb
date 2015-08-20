@@ -11,7 +11,18 @@ class Stat
 
   def get(team_a_words=@config["team_a_words"], team_b_words=@config["team_b_words"])
     votes_a, votes_b, votes_undecided = count_vote(team_a_words, team_b_words)
+
     total_vote = votes_a + votes_b + votes_undecided
+
+    rate_a_in_ab = 100.0 * votes_a / (votes_a + votes_b) # 中立を含めないAチームの割合
+    rate_b_in_ab = 100.0 * votes_b / (votes_a + votes_b) # 中立を含めないBチームの割合
+
+    # 得票率をひっくり返すのに必要な勝率
+    # 例:
+    # Aチーム: 40 + 52.5*4 = 280
+    # Bチーム: 60 + 47.5*4 = 280
+    diff = (rate_a_in_ab - rate_b_in_ab).abs
+    defeat_win_rate = 50.0 + (diff / 4 / 2)
 
     {
       :team_a_name => @config["team_a_name"],
@@ -23,9 +34,11 @@ class Stat
       :rate_a => 100.0 * votes_a / total_vote,
       :rate_b => 100.0 * votes_b / total_vote,
       :rate_undecided => 100.0 * votes_undecided / total_vote,
-      :rate_a_in_ab => 100.0 * votes_a / (votes_a + votes_b),
-      :rate_b_in_ab => 100.0 * votes_b / (votes_a + votes_b),
+      :rate_a_in_ab => rate_a_in_ab,
+      :rate_b_in_ab => rate_b_in_ab,
       :winner => votes_a > votes_b ? @config["team_a_name"] : @config["team_b_name"],
+      :loser => votes_a > votes_b ? @config["team_b_name"] : @config["team_a_name"],
+      :defeat_win_rate => defeat_win_rate,
     }
   end
 

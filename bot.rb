@@ -8,7 +8,8 @@ require_relative "stat"
 class Bot
   def initialize
     config = YAML.load_file('config.yaml')
-    @start_time = Time.parse(config['announced_at'])
+    @announced_at = Time.parse(config['announced_at'])
+    @start_time = Time.parse(config['fes_period']['start'])
     @end_time = Time.parse(config['fes_period']['end'])
 
     @yaml = YAML.load_file('auth.yaml')
@@ -22,13 +23,31 @@ class Bot
   end
 
   def tweet
+    now = Time.now
+
     # 開催時間外はツイートしない
     # 開始・終了時刻ちょうどはツイートしたいのでマージン
-    return if Time.now < (@start_time - 1.minute) || (@end_time + 1.minute) < Time.now
+    return if now < (@announced_at - 1.minute) || (@end_time + 1.minute) < now
 
     stat = Stat.new.get
 
-    tweet = sprintf(<<-EOS, stat[:rate_a], stat[:rate_b], stat[:rate_undecided])
+    tweet =
+      if now < @start_time
+        tweet_while_voting(stat)
+      else
+        tweet_while_battle(stat)
+      end
+
+    @twitter.update(tweet)
+
+    # log
+    puts Time.now
+    puts "total_vote: #{stat[:total_vote]} votes_a: #{stat[:votes_a]} votes_b: #{stat[:votes_b]} votes_undecided: #{stat[:votes_undecided]}"
+    puts tweet
+  end
+
+  def tweet_while_voting(stat)
+    sprintf(<<-EOS, stat[:rate_a], stat[:rate_b], stat[:rate_undecided])
 【選挙速報】
 #{stat[:team_a_name]} %.1f%%
 #{stat[:team_b_name]} %.1f%%
@@ -39,13 +58,19 @@ class Bot
 (集計アカウント数: #{stat[:total_vote]})
 #splatoon #スプラトゥーン
     EOS
+  end
 
-    @twitter.update(tweet)
+  def tweet_while_battle(stat)
+    sprintf(<<-EOS, stat[:rate_a_in_ab], stat[:rate_b_in_ab], stat[:defeat_win_rate])
+【選挙速報】
+#{stat[:team_a_name]} %.1f%%
+#{stat[:team_b_name]} %.1f%%
 
-    # log
-    puts Time.now
-    puts "total_vote: #{stat[:total_vote]} votes_a: #{stat[:votes_a]} votes_b: #{stat[:votes_b]} votes_undecided: #{stat[:votes_undecided]}"
-    puts tweet
+#{stat[:loser]}チームは、勝率%.1f%%以上で逆転です！
+
+(集計アカウント数: #{stat[:total_vote]})
+#splatoon #スプラトゥーン
+    EOS
   end
 end
 
