@@ -48,7 +48,7 @@ class Bot
 
   def tweet_while_voting(stat)
     sprintf(<<-EOS, stat[:rate_a], stat[:rate_b], stat[:rate_undecided])
-【選挙速報】
+【得票予想】
 #{stat[:team_a_name]} %.1f%%
 #{stat[:team_b_name]} %.1f%%
 中立 %.1f%%
@@ -62,7 +62,7 @@ class Bot
 
   def tweet_while_battle(stat)
     sprintf(<<-EOS, stat[:rate_a_in_ab], stat[:rate_b_in_ab], stat[:defeat_win_rate])
-【選挙速報】
+【得票予想】
 #{stat[:team_a_name]} %.1f%%
 #{stat[:team_b_name]} %.1f%%
 
