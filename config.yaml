@@ -1,19 +1,19 @@
-announced_at: "2015-09-05 11:00" # 投票の開始時刻
+announced_at: "2015-10-03 11:00" # 投票の開始時刻
 fes_period:
-  start: "2015-09-12 12:00" # 試合の開始時刻
-  end: "2015-09-13 12:00" # 試合の終了時刻
+  start: "2015-10-10 09:00" # 試合の開始時刻
+  end: "2015-10-11 09:00" # 試合の終了時刻
 track_keywords:
   - splatoon
   - スプラトゥーン
-team_a_name: ボケ
-team_b_name: ツッコミ
+team_a_name: イカ
+team_b_name: タコ
 team_a_words:
-  - ボケ
+  - イカ
   - アオリ
 team_b_words:
-  - ツッコミ
+  - タコ
   - ホタル
 team_a_words_min:
-  - ボケ
+  - イカ
 team_b_words_min:
-  - ツッコミ
+  - タコ
