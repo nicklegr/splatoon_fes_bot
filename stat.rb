@@ -49,12 +49,19 @@ class Stat
 
     found_tweets = valid_tweets.select do |e|
       ret = false
+      text = e.text
+
+      @config["ignore_words"].each do |word|
+        text.gsub!(word, "")
+      end
+
       (team_a_words + team_b_words).each do |word|
-        if e.text.include?(word)
+        if text.include?(word)
           ret = true
           break
         end
       end
+
       ret
     end
 
@@ -68,12 +75,18 @@ class Stat
       score_a = score_b = 0
 
       tweets.each do |tweet|
+        text = tweet.text
+
+        @config["ignore_words"].each do |word|
+          text.gsub!(word, "")
+        end
+
         team_a_words.each do |e|
-          score_a += tweet.text.scan(e).size
+          score_a += text.scan(e).size
         end
 
         team_b_words.each do |e|
-          score_b += tweet.text.scan(e).size
+          score_b += text.scan(e).size
         end
       end
 
