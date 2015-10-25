@@ -19,10 +19,10 @@ class Stat
 
     # 得票率をひっくり返すのに必要な勝率
     # 例:
-    # Aチーム: 40 + 52.5*4 = 280
-    # Bチーム: 60 + 47.5*4 = 280
+    # Aチーム: 35 + 52.5*6 = 350
+    # Bチーム: 65 + 47.5*6 = 350
     diff = (rate_a_in_ab - rate_b_in_ab).abs
-    defeat_win_rate = 50.0 + (diff / 4 / 2)
+    defeat_win_rate = 50.0 + (diff / 6 / 2)
 
     {
       :team_a_name => @config["team_a_name"],
