@@ -1,20 +1,22 @@
-announced_at: "2015-10-24 11:00" # 投票の開始時刻
+announced_at: "2015-11-13 08:25" # 投票の開始時刻
 fes_period:
-  start: "2015-10-31 09:00" # 試合の開始時刻
-  end: "2015-11-01 09:00" # 試合の終了時刻
+  start: "2015-11-21 12:00" # 試合の開始時刻
+  end: "2015-11-22 12:00" # 試合の終了時刻
 track_keywords:
   - splatoon
   - スプラトゥーン
-team_a_name: 愛
-team_b_name: おカネ
+team_a_name: 山の幸
+team_b_name: 海の幸
 team_a_words:
-  - 愛
+  - 山の幸
+  - 佐賀牛
   - アオリ
 team_b_words:
-  - おカネ
+  - 海の幸
   - ホタル
 team_a_words_min:
-  - 愛
+  - 山の幸
+  - 佐賀牛
 team_b_words_min:
-  - おカネ
+  - 海の幸
 ignore_words: []
