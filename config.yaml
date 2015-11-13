@@ -13,10 +13,12 @@ team_a_words:
   - アオリ
 team_b_words:
   - 海の幸
+  - 呼子のイカ
   - ホタル
 team_a_words_min:
   - 山の幸
   - 佐賀牛
 team_b_words_min:
   - 海の幸
+  - 呼子のイカ
 ignore_words: []
