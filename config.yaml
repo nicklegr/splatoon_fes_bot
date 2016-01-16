@@ -1,20 +1,20 @@
-announced_at: "2015-12-19 11:00" # 投票の開始時刻
+announced_at: "2016-01-16 11:00" # 投票の開始時刻
 fes_period:
-  start: "2015-12-26 9:00" # 試合の開始時刻
-  end: "2015-12-27 9:00" # 試合の終了時刻
+  start: "2016-01-23 12:00" # 試合の開始時刻
+  end: "2016-01-24 12:00" # 試合の終了時刻
 track_keywords:
   - splatoon
   - スプラトゥーン
-team_a_name: 赤いきつね
-team_b_name: 緑のたぬき
+team_a_name: カンペキなカラダ
+team_b_name: カンペキな頭脳
 team_a_words:
-  - 赤いきつね
+  - カンペキなカラダ
   - アオリ
 team_b_words:
-  - 緑のたぬき
+  - カンペキな頭脳
   - ホタル
 team_a_words_min:
-  - 赤いきつね
+  - カンペキなカラダ
 team_b_words_min:
-  - 緑のたぬき
+  - カンペキな頭脳
 ignore_words: []
