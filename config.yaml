@@ -1,22 +1,20 @@
-announced_at: "2016-02-12 11:00" # 投票の開始時刻
+announced_at: "2016-03-04 11:00" # 投票の開始時刻
 fes_period:
-  start: "2016-02-20 06:00" # 試合の開始時刻
-  end: "2016-02-21 06:00" # 試合の終了時刻
+  start: "2016-03-12 09:00" # 試合の開始時刻
+  end: "2016-03-13 09:00" # 試合の終了時刻
 track_keywords:
   - splatoon
   - スプラトゥーン
-team_a_name: ポケットモンスター赤
-team_b_name: ポケットモンスター緑
+team_a_name: ガンガンいこうぜ
+team_b_name: いのちだいじに
 team_a_words:
-  - ポケットモンスター赤
-  - ポケモン赤
+  - ガンガンいこうぜ
   - アオリ
 team_b_words:
-  - ポケットモンスター緑
-  - ポケモン緑
+  - いのちだいじに
   - ホタル
 team_a_words_min:
-  - ポケットモンスター赤
+  - ガンガンいこうぜ
 team_b_words_min:
-  - ポケットモンスター緑
+  - いのちだいじに
 ignore_words: []
