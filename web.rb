@@ -15,7 +15,7 @@ get "/" do
   @stat_min = stat.get(config["team_a_words_min"], config["team_b_words_min"])
 
   @last_update = Tweet.desc(:created_at).first.created_at
-  @tweet_count = Tweet.count()
+  # @tweet_count = Tweet.count()
 
   slim :index
 end
