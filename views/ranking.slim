@@ -1,10 +1,20 @@
 h4 フェスパワーランキング
 
+ul
+  li
+    a href="https://splatoon.nintendo.net/"
+      | イカリング
+    | からツイートするとランキングに載ります
+  li 取りこぼしがあったらすみません。もう一回ツイートすると載ると思います
+  li 集計の遅れで公式と値が違うことがあります
+
 table.table style='width: 60%'
   - @ranking.each_with_index do |e, i|
     tr
       td= i + 1
-      td= e[:screen_name]
+      td
+        a href="https://twitter.com/#{e[:screen_name]}"
+          = "@#{e[:screen_name]}"
       td
         a href="#{e[:url]}"
           = e[:power_text]
