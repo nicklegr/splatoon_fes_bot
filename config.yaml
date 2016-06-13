@@ -1,24 +1,24 @@
-announced_at: "2016-04-12 11:00" # 投票の開始時刻
+announced_at: "2016-06-10 11:00" # 投票の開始時刻
 fes_period:
-  start: "2016-04-23 09:00" # 試合の開始時刻
-  end: "2016-04-24 09:00" # 試合の終了時刻
+  start: "2016-06-18 09:00" # 試合の開始時刻
+  end: "2016-06-19 09:00" # 試合の終了時刻
 track_keywords:
   - splatoon
   - スプラトゥーン
-team_a_name: ツナマヨネーズ
-team_b_name: 紅しゃけ
+team_a_name: きのこの山
+team_b_name: たけのこの里
 team_a_words:
-  - ツナマヨネーズ
-  - ツナマヨ
+  - きのこの山
+  - きのこ
   - アオリ
 team_b_words:
-  - 紅しゃけ
-  - 紅シャケ
-  - しゃけ
-  - シャケ
+  - たけのこの里
+  - たけのこ
   - ホタル
 team_a_words_min:
-  - ツナマヨネーズ
+  - きのこの山
 team_b_words_min:
-  - 紅しゃけ
-ignore_words: []
+  - たけのこの里
+ignore_words:
+  - 生きのこる
+  
