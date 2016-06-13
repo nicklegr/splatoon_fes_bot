@@ -9,16 +9,12 @@ team_a_name: きのこの山
 team_b_name: たけのこの里
 team_a_words:
   - きのこの山
-  - きのこ
   - アオリ
 team_b_words:
   - たけのこの里
-  - たけのこ
   - ホタル
 team_a_words_min:
   - きのこの山
 team_b_words_min:
   - たけのこの里
-ignore_words:
-  - 生きのこる
-  
+ignore_words: []
