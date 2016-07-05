@@ -1,20 +1,18 @@
-announced_at: "2016-06-10 11:00" # 投票の開始時刻
+announced_at: "2016-06-30 15:00" # 投票の開始時刻
 fes_period:
-  start: "2016-06-18 09:00" # 試合の開始時刻
-  end: "2016-06-19 09:00" # 試合の終了時刻
+  start: "2016-07-22 12:00" # 試合の開始時刻
+  end: "2016-07-24 12:00" # 試合の終了時刻
 track_keywords:
   - splatoon
   - スプラトゥーン
-team_a_name: きのこの山
-team_b_name: たけのこの里
+team_a_name: アオリ
+team_b_name: ホタル
 team_a_words:
-  - きのこの山
   - アオリ
 team_b_words:
-  - たけのこの里
   - ホタル
 team_a_words_min:
-  - きのこの山
+  - アオリ
 team_b_words_min:
-  - たけのこの里
+  - ホタル
 ignore_words: []
